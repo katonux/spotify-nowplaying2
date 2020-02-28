@@ -1,9 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import NowPlaying from '@/views/NowPlaying.vue'
 
 Vue.use(VueRouter)
 
-const routes = []
+const routes = [
+  {
+    path: '/',
+    name: 'NowPlaying',
+    component: NowPlaying
+  }
+]
 
 const router = new VueRouter({
   mode: 'history',
