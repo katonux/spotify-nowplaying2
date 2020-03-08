@@ -10,10 +10,7 @@ const routes = [
     name: 'NowPlaying',
     component: NowPlaying,
     props: (route) => {
-      if (route.hash) {
-        router.push(route.fullPath.replace('#', '?'))
-      }
-      return { params: route.query }
+      return { routeParams: route.query }
     }
   }
 ]

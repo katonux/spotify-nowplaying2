@@ -20,7 +20,12 @@ export default {
     }
   },
   props: {
-    params: Object
+    routeParams: Object
+  },
+  created: function() {
+    if (this.$route.hash) {
+      this.$router.push(this.$route.fullPath.replace('#', '?'))
+    }
   },
   methods: {
     spotifyLogin: function() {
