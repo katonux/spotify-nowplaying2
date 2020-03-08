@@ -44,7 +44,7 @@ export default {
       let endpoint = 'https://api.spotify.com/v1/me/player/currently-playing?market=JP'
       let data = {
         headers: {
-          'Authorization': this.params.token_type + ' ' + this.params.access_token
+          'Authorization': this.routeParams.token_type + ' ' + this.routeParams.access_token
         },
         data: {}
       }
