@@ -8,13 +8,18 @@ const routes = [
   {
     path: '/',
     name: 'NowPlaying',
-    component: NowPlaying
+    component: NowPlaying,
+    props: (route) => {
+      if (route.hash) {
+        router.push(route.fullPath.replace('#', '?'))
+      }
+      return { params: route.query }
+    }
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
   routes
 })
 
