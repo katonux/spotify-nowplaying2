@@ -6,6 +6,7 @@
     <button @click="getNowPlaying">再生中の曲情報取得</button>
     <div v-if="nowPlaying != null">
       <p>今再生中の曲 : {{ nowPlaying.item.artists[0].name }} の {{ nowPlaying.item.name }}</p>
+      <img :src="nowPlaying.item.album.images[1].url">
     </div>
   </div>
 </template>
