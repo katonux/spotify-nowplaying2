@@ -3,10 +3,13 @@
     <h1>NowPlaying</h1>
     <button @click="spotifyLogin">認証</button>
     <br>
-    <button @click="getNowPlaying">再生中の曲情報取得</button>
+    <button @click="getNowPlaying">最近再生した曲情報取得</button>
+
     <div v-if="nowPlaying != null">
-      <p>今再生中の曲 : {{ nowPlaying.item.artists[0].name }} の {{ nowPlaying.item.name }}</p>
-      <img :src="nowPlaying.item.album.images[1].url">
+    <div v-for="item in nowPlaying.items" :key="item.track.id">
+      <p>{{ item.track.artists[0].name }} の {{ item.track.name }}</p>
+      <img :src="item.track.album.images[1].url">
+    </div>
     </div>
   </div>
 </template>
@@ -33,7 +36,7 @@ export default {
       let response_type = 'token'
       let client_id = '8f6071cd5afe45c99d7ea88d26c4b938'
       let redirect_uri = 'http://localhost:8080'
-      let scope = 'user-read-currently-playing'
+      let scope = 'user-read-recently-played'
       location.href = endpoint + 
         '?response_type=' + response_type +
         '&client_id=' + client_id +
@@ -41,7 +44,7 @@ export default {
         '&scope=' + scope
     },
     getNowPlaying: function() {
-      let endpoint = 'https://api.spotify.com/v1/me/player/currently-playing?market=JP'
+      let endpoint = 'https://api.spotify.com/v1/me/player/recently-played'
       let data = {
         headers: {
           'Authorization': this.routeParams.token_type + ' ' + this.routeParams.access_token
