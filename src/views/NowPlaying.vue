@@ -1,16 +1,31 @@
 <template>
   <div class="nowplaying">
-    <h1>NowPlaying</h1>
-    <button @click="spotifyLogin">認証</button>
-    <br>
-    <button @click="getNowPlaying">最近再生した曲情報取得</button>
 
-    <div v-if="nowPlaying != null">
-    <div v-for="item in nowPlaying.items" :key="item.track.id">
-      <p>{{ item.track.artists[0].name }} の {{ item.track.name }}</p>
-      <img :src="item.track.album.images[1].url">
-    </div>
-    </div>
+    <v-container>
+      
+      <h1>NowPlaying</h1>
+      <v-btn @click="spotifyLogin">認証</v-btn>
+      <v-btn @click="getNowPlaying">最近再生した曲情報取得</v-btn>
+        
+      <div v-if="nowPlaying != null">
+        <v-row>
+          <v-col v-for="item in nowPlaying.items" :key="item.track.id" cols="12">
+            <v-card dark color="teal">
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <div>
+                  <v-card-title class="headline">{{ item.track.name }}</v-card-title>
+                  <v-card-subtitle>{{ item.track.artists[0].name }}</v-card-subtitle>
+                </div>
+                <v-avatar class="ma-3" size="180" tile>
+                  <v-img :src="item.track.album.images[1].url" />
+                </v-avatar>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
+
+    </v-container>
   </div>
 </template>
 
